@@ -125,3 +125,17 @@ print("\n")
 for key, value in latest.items():
     print(f"{key}: {value}")
 print("\n")
+
+# > ------------- pop ---------------------
+pop_list = {
+    'name': 'ice',
+    'age': 20
+}
+print(f"\n{Fore.blue}List Before:")
+print(pop_list)
+
+# ? Popping
+pop_list.pop('age')
+
+print("List after")
+print(pop_list)
