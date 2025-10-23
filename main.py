@@ -2,7 +2,9 @@
 shop = {
     # > ITEM NAME | STAT | VAL | PRICE
     "Sword": ['ATK', 100, 200],
-    "Shield": ['DEF', 50, 120]
+    "Shield": ['DEF', 50, 120],
+    "Knife": ['ATK', 50, 100],
+    "Helmet": ['DEF', 100, 200]
 }
 
 player = {
@@ -89,5 +91,5 @@ while True:
         break
     else:
         print("Invalid input")
-        
+
 print("Bye!")
