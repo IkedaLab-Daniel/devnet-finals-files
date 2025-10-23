@@ -139,3 +139,18 @@ pop_list.pop('age')
 
 print("List after")
 print(pop_list)
+
+# > ---------------- clear -----------------
+clear_list = {
+    'name': 'ice',
+    'age': 20
+}
+
+print(f"\n{Fore.green}List Before:")
+print(clear_list)
+
+# ? Clearing
+clear_list.clear()
+
+print("List after")
+print(clear_list)
