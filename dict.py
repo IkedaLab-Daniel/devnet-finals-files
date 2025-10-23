@@ -90,7 +90,7 @@ for key, value in latest.items():
 for item in latest:
     print(item)
 
-latest.update({'name': 'hehe', 'age': 19, 'school': 'sample'})
+latest.update({'name': 'hehe', 'age': 19, 'school': 'sample', 'sample': 'sample'})
 
 print("\nNew:")
 # ? Printing a Key: Value ----------------------------
@@ -107,3 +107,21 @@ for item in latest:
     print(item)
 
 print(f"{Style.reset}")
+
+# > ---------- printing keys -------------------
+
+for i in latest.keys():
+    print(i)
+print("\n")
+
+# > ---------- printing values ------------------
+
+for i in latest.values():
+    print(i)
+print("\n")
+
+# > ----------- printing key: value/s -----------
+
+for key, value in latest.items():
+    print(f"{key}: {value}")
+print("\n")
