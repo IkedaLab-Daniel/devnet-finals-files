@@ -8,7 +8,8 @@ shop = {
 player = {
     "ATK": 20,
     "DEF": 10,
-    "GOLD": 1000
+    "GOLD": 1000,
+    "BAG": []
 }
 
 def playerDetail():
@@ -19,11 +20,21 @@ def playerDetail():
             GOLD    -       {player["GOLD"]}g
     |-------------------------------------| 
  """)
+    
+def playerBag():
+    print("     ------------- Bag ---------------")
+    if len(player["BAG"]) != 0:
+        for i, item in enumerate(player["BAG"], start=1):
+            print(f"{i} | {item}")
+    else:
+        print("              No bag item yet")
+        print("     ----------------------------------")
 def menu():
     print(""" 
         |--------------- Menu --------------|
                 1 - Show Player Status
                 2 - Buy in shop
+                3 - Show bag
         |-----------------------------------| 
         |     'quit'   to    exit           |
         -------------------------------------
@@ -31,10 +42,8 @@ def menu():
 
 def buy():
     print("======= Shop Item =========")
-    ice = 1
     for item, details in shop.items():
-        print(f"{ice} | {item}: {details}")
-        ice = ice + 1
+        print(f"{item}: {details}")
     print("============================")
     buy_item = input("Enter item NAME to buy: ")
     stat_name = shop[buy_item][0]
@@ -57,6 +66,9 @@ def buy():
         player["DEF"] = player_def
     else:
         print("not ATK not DEF")
+
+    # ? Add to bag
+    player["BAG"].append(buy_item)
     print("======= SUCCESS: NEW PLAYER DETAIL ===========")
     playerDetail()
     print("==============================================")
@@ -71,7 +83,11 @@ while True:
         playerDetail()
     elif action == '2':
         buy()
+    elif action == '3':
+        playerBag()
     elif action == 'quit':
         break
     else:
         print("Invalid input")
+        
+print("Bye!")
