@@ -54,3 +54,16 @@ print(f"\nUpdated List:")
 print(new_dict)
 
 print(f"{Style.reset}")
+
+# > ---------------- Changing a Key -----------------------------------------
+
+another_new_dict = {
+    'name': 'ice'
+}
+
+print(f"\n{Fore.blue}Start dict")
+print(another_new_dict)
+
+another_new_dict['first_name'] = another_new_dict.pop('name')  # > Change key
+print("\nNew dict")
+print(another_new_dict)
