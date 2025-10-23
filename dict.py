@@ -169,3 +169,32 @@ pop_item.popitem()
 
 print("List after")
 print(pop_item)
+
+# > ------- More method testing -------------
+test_dict = {
+    'name': ['Mark', 'Daniel'],
+    'age': 20,
+    'schhol': 'MCC'
+}
+print(f"\n{Fore.green}")
+
+
+my_keys = test_dict.keys()
+my_values = test_dict.values()
+my_items = test_dict.items()
+
+print("\n.keys():")
+for i in my_keys:
+    print(i)
+
+print("\n.values():")
+for i in my_values:
+    print(i)
+
+print("\n.items():")
+for i in my_items:
+    print(i)
+
+print("\n.items() in KEY:VALUE format:")
+for key, value in my_items:
+    print(f"{key}: {value}")
