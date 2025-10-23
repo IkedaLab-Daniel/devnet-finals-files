@@ -67,3 +67,43 @@ print(another_new_dict)
 another_new_dict['first_name'] = another_new_dict.pop('name')  # > Change key
 print("\nNew dict")
 print(another_new_dict)
+
+print(f"{Style.reset}")
+
+# > -----   Updating a dict    -----
+print(f"\n{Fore.green}")
+
+latest = {
+    'name': 'ice',
+    'age': 20,
+    'school': 'MCC'
+}
+print("\nStart:")
+print(latest)
+# ? Printing a Key: Value ----------------------------
+# > print: name: hehe, age: 19, school: sample
+ice = 1
+for key, value in latest.items():
+    print(f"{ice}. {key}: {value}")
+    ice = ice + 1
+# ? --------------------------------------------------
+for item in latest:
+    print(item)
+
+latest.update({'name': 'hehe', 'age': 19, 'school': 'sample'})
+
+print("\nNew:")
+# ? Printing a Key: Value ----------------------------
+# > print: name: hehe, age: 19, school: sample
+ice = 1
+for key, value in latest.items():
+    print(f"{ice}. {key}: {value}")
+    ice = ice + 1
+# ? --------------------------------------------------
+
+
+print(latest)
+for item in latest:
+    print(item)
+
+print(f"{Style.reset}")
