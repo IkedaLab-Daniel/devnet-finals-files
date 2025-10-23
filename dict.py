@@ -1,3 +1,5 @@
+from colored import Fore, Style
+
 my_dict = {
     'name': ['ice', 'daniel', 'mark', 'callejas'],
     'school': 'MCC',
@@ -24,10 +26,31 @@ persons = {
 print(persons)
 print("\n---- 1 - keys:")
 for i, person in enumerate(persons, start=1):
-    print(f"Key {i}: {person}")
+    print(f"{Fore.green}Key {i}: {person}{Style.reset}")
 
 print("\n---- 2 - keys:")
 keys = persons.keys()
 for i, key in enumerate(keys, start=1):
     print(f"Key {i}: {key}")
 print(keys)
+
+# > ---------------- Changing a Value -----------------------------------------
+print(f"\n{Fore.green}")
+new_dict = {
+    'name': ['daniel']
+}
+
+print(f"\nStart List:")
+print(new_dict)
+
+name = new_dict["name"][0]
+print(name)
+
+new_dict['name'] = 'ice' # > Change value
+changed_name = new_dict['name']  # > GET changed value
+print(changed_name) # > print
+
+print(f"\nUpdated List:")
+print(new_dict)
+
+print(f"{Style.reset}")
