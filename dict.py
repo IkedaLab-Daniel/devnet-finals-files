@@ -154,3 +154,18 @@ clear_list.clear()
 
 print("List after")
 print(clear_list)
+
+# > ------------------- popitem ---------------
+pop_item = {
+    'name': 'ice',
+    'age': 20
+}
+
+print(f"\n{Fore.blue}List Before:")
+print(pop_item)
+
+# ? popitem
+pop_item.popitem()
+
+print("List after")
+print(pop_item)
