@@ -24,24 +24,68 @@ def playerDetail():
  """)
     
 def playerBag():
-    print("        |------------- Bag ---------------|")
+    print("        |------------------ Bag --------------------|")
     if len(player["BAG"]) != 0:
         for i, item in enumerate(player["BAG"], start=1):
-            print(f"                {i} | {item[0]} +{item[2]} {item[1]}")
-        print("        |---------------------------------|")
+            print(f"                {i} | {item[0]} +{item[2]} {item[1]}  -   {item[3]}")
+        print("        |--------------------------------------|")
     else:
         print("              No bag item yet")
         print("         ----------------------------------")
+
 def menu():
     print(""" 
         |--------------- Menu --------------|
                 1 - Show Player Status
                 2 - Buy in shop
                 3 - Show bag
+                4 - Equip Item
         |-----------------------------------| 
         |     'quit'   to    exit           |
         -------------------------------------
     """)
+
+def equipItem():
+    print("         |--- Select which item to equip ---|")
+    if len(player["BAG"]) != 0:
+        for i, item in enumerate(player["BAG"], start=1):
+            print(f"                {i} | {item[0]} +{item[2]} {item[1]}   -   {item[3]}")
+        print("        |---------------------------------|")
+
+        toEquip = int(input("Item number to equip: "))
+
+        # > validate range
+        if (toEquip > len(player["BAG"])):
+            print("Exceed range input")
+        else:
+            item = player["BAG"][toEquip - 1]
+            itemStatName = item[1]
+            itemStatValue = item[2]
+            itemStatus = item[3]
+
+            if (itemStatus == "Unequipped"):
+                if (itemStatName == "ATK"):
+                    player["ATK"] = player["ATK"] + itemStatValue
+
+                    # > update the item to be "equipped"
+                    item[3] = 'Equipped'
+                    print("         |--------- Success! Item Equiped ---------|")
+                    playerDetail()  
+                elif (itemStatName == "DEF"):
+                    player["DEF"] = player["DEF"] + itemStatValue
+
+                    item[3] = 'Equipped'
+
+                    print("         |--------- Success! Item Equiped ---------|")
+                    playerDetail()
+                else:
+                    print("may mali sa ginawa ko")
+            else:
+                print("     ! >>>>>>>>>>>>>> Item Already Equipped <<<<<<<<<<<<<<<<<")
+
+    else:
+        print("              No bag item yet")
+        print("         ----------------------------------")
 
 def buy():
     print("======= Shop Item =========")
@@ -62,17 +106,17 @@ def buy():
         else:
             print("Insufficient Gold")
 
-        if stat_name == "ATK":
-            player_atk = int(player["ATK"]) + stat_value
-            player["ATK"] = player_atk
-        elif stat_name == "DEF":
-            player_def = int(player["DEF"]) + stat_value
-            player["DEF"] = player_def
-        else:
-            print("not ATK not DEF")
+        # ? if stat_name == "ATK":
+        #     player_atk = int(player["ATK"]) + stat_value
+        #     player["ATK"] = player_atk
+        # elif stat_name == "DEF":
+        #     player_def = int(player["DEF"]) + stat_value
+        #     player["DEF"] = player_def
+        # else:
+        #     print("not ATK not DEF")
 
         # ? Add to bag
-        player["BAG"].append([buy_item, stat_name, stat_value])
+        player["BAG"].append([buy_item, stat_name, stat_value, 'Unequipped'])
         print("\n\n======= SUCCESS: NEW PLAYER DETAIL ===========")
         playerDetail()
         print("==============================================")
@@ -91,6 +135,8 @@ while True:
         buy()
     elif action == '3':
         playerBag()
+    elif action == '4':
+        equipItem()
     elif action == 'quit':
         break
     else:
