@@ -1,0 +1,22 @@
+{
+    "aaa": {
+        "password": "aaa",
+        "name": "aaa",
+        "bio": "kkkk",
+        "posts": [
+            "my post"
+        ]
+    },
+    "ooo": {
+        "password": "ooo",
+        "name": "kkk",
+        "bio": "",
+        "posts": []
+    },
+    "jjj": {
+        "password": "jjj",
+        "name": "Mark",
+        "bio": "",
+        "posts": []
+    }
+}
