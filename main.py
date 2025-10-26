@@ -7,9 +7,9 @@ def load_data():
     except:
         pass
 
-def save_data(data):
+def save_data(updated_data):
     with open('users.json', 'w') as file:
-        json.dump(data, file, indent=4)
+        json.dump(updated_data, file, indent=4)
 
 def register():
     # > STEP 1: LOAD THE DATAAA
@@ -103,16 +103,27 @@ def profile_menu(username):
 
 def view_profile(username):
     users = load_data()
-    user = users[username]
-    print(f"\nName: {user['name']}")
-    print(f"Bio: {user['bio']}")
+    user = users[username] # > the specific user na naka-login
+
+    print(f"""
+    |----------------------------------|    
+            Name: {user['name']}
+            Bio: {user['bio']}
+    |----------------------------------|
+ """)
+
 
 def update_bio(username):
     users = load_data()
+
     new_bio = input("Enter your new bio: ")
     users[username]["bio"] = new_bio
     save_data(users)
-    print("Bio updated successfully!")
+    print("""
+    |----------------------------------|    
+    |    Bio updated successfully!     |
+    |----------------------------------|    
+    """)
 
 def create_post(username):
     users = load_data()
