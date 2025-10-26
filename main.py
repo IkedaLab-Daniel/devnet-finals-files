@@ -1,75 +1,167 @@
 import json
 
 def load_data():
-    with open(USER_DATA, 'r') as file:
-        data = json.load(file)
-        return data
-
-# > append data 
-def save_data(username ,data_to_add):
-    with open(f"{username}.json", 'x') as file:
+    try:
+        with open('users.json', 'r') as file:
+            return json.load(file)
+    except:
         pass
 
-    with open(f"{username}.json", 'w') as file:
-        json.dump(data_to_add, file)
-
+def save_data(data):
+    with open('users.json', 'w') as file:
+        json.dump(data, file, indent=4)
 
 def register():
-    username = input("Enter username: ")
-    password = input("Enter password: ")
-    bio = input("Enter bio: ")
+    # > STEP 1: LOAD THE DATAAA
+    users = load_data()
 
-    to_add = {
-        f"{username}": {
-            "password": f"{password}",
-            "bio": f"{bio}",
-            "posts": []
-        }
-    }   
-    print(to_add)
-    save_data(username ,to_add)
+    # > STEP 2: Input user info
+    username = input("Enter username: ")
+
+    if username in users: 
+        print("""
+     |---------------------------|         
+     |  Username already exists  |
+     |---------------------------|
+              """)
+        return
+    
+    password = input("Enter password: ")
+    name = input("Enter your name: ")
+
+        # > basically, hahapanin niyan yung users[username],
+        # > pero di pa siya exists (username exist validation above),
+        # > so iwri-write niya yund data instead of edit
+    users[username] = {     
+        "password": password,
+        "name": name,
+        "bio": "",
+        "posts": []
+    }
+
+    # > STEP 3: Saving
+    save_data(users)
+    print("""
+    |---------------------------------|    
+    |    Registration successful!     |
+    |---------------------------------|
+    """)
 
 def login():
+    # > Step 1: Load data
+    users = load_data()
     username = input("Enter username: ")
     password = input("Enter password: ")
-    data = load_data()
-    if username in data and data[username] == password:
+    if ((username in users) and ((users[username]["password"] == password))):
         print("Login successful!")
+        profile_menu(username)
     else:
-        print("Invalid username or password.")
+        print("""
+    |----------------------------------|    
+    |   Invalid username or password.  |
+    |----------------------------------|    
+    """)
 
-def view_profile():
-    pass
+def menu():
+    print("""
+    |---------- Menu -----------|
+    |    1  |      Register     |
+    |    2  |      Login        |
+    |---------------------------|
+    |  enter 'quit' to exit     |
+    |---------------------------|
+    """)
 
-def update_bio():
-    pass
+# > Menu after user logged in
+def profile_menu(username):
+    while True:
+        print(f"""\n
+    |-- Welcome to Fakebook CLI-----|
+           User: {username} 
+    |     1    |    View Profile    |
+    |     2    |    Update Bio      |
+    |     3    |    Create Post     |
+    |     4    |    View Posts      |
+    |     5    |    Logout          |
+    |-------------------------------|
+ """)
 
-def create_post():
-    pass
+        choice = input("Enter your choice: ")
 
-def view_user_post():
-    pass
+        if choice == '1':
+            view_profile(username)
+        elif choice == '2':
+            update_bio(username)
+        elif choice == '3':
+            create_post(username)
+        elif choice == '4':
+            view_posts(username)
+        elif choice == '5':
+            break
+        else:
+            print("Invalid choice.")
+
+def view_profile(username):
+    users = load_data()
+    user = users[username]
+    print(f"\nName: {user['name']}")
+    print(f"Bio: {user['bio']}")
+
+def update_bio(username):
+    users = load_data()
+    new_bio = input("Enter your new bio: ")
+    users[username]["bio"] = new_bio
+    save_data(users)
+    print("Bio updated successfully!")
+
+def create_post(username):
+    users = load_data()
+    post = input("Enter your post: ")
+    users[username]["posts"].append(post)
+    save_data(users)
+    print("""
+    |----------------------------------|    
+    |    Post created successfully!    |
+    |----------------------------------|    
+          """)
+
+def view_posts(username):
+    users = load_data()
+    posts = users[username]["posts"]
+    if posts:
+        print("\nYour Posts:")
+        for i, post in enumerate(posts, 1):
+            print(f"{i}. {post}")
+    else:
+        print("""
+    |----------------------------------|        
+    |       You have no posts yet.     |
+    |----------------------------------|    
+""")
+    
 
 def main():
     while True:
-        print("""
-        |----- Welcome to FakeBook -----|
-        |      1      |   Login         |
-        |      2      |   Register      |
-        |--------------------------------
-        |        'quit' to exit         |
-        |-------------------------------|
-        """)
-        
-        choice = input('Choose: ')
+        menu()
+        choice = input("Enter your choice: ")
+
         if choice == '1':
-            login()
-        elif choice == '2':
             register()
+        elif choice == '2':
+            login()
         elif choice == 'quit':
+            print("""
+    |------------- Bye -------------|
+    |    Pls, don't forget your     |
+    |     username and password     |
+    |-------------------------------|
+                  """)
             break
         else:
-            print("Invalid input")
-
+            print("""
+    |----------------------------------|    
+    |          Invalid choice          |
+    |----------------------------------|    
+    """)
 
 main()
