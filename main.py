@@ -5,7 +5,9 @@ def load_data():
         with open('users.json', 'r') as file:
             return json.load(file)
     except:
-        pass
+        # > return empty dict, instead of null, or it will cause error:
+        # ! TypeError: argument of type 'NoneType' is not iterable
+        return {}
 
 def save_data(updated_data):
     with open('users.json', 'w') as file:
@@ -44,6 +46,8 @@ def register():
     print("""
     |---------------------------------|    
     |    Registration successful!     |
+    |    You can now Log In with      |
+    |        your credentials         |
     |---------------------------------|
     """)
 
@@ -76,7 +80,7 @@ def menu():
 def profile_menu(username):
     while True:
         print(f"""\n
-    |-- Welcome to Fakebook CLI-----|
+    |--- Welcome to Fakebook CLI ---|
            User: {username} 
     |     1    |    View Profile    |
     |     2    |    Update Bio      |
